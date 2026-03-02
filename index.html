@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strateg · minimal dark blue</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Strateg</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -14,488 +14,699 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+        }
+
+        :root {
+            --bg-primary: #030614;
+            --bg-secondary: #0a1428;
+            --bg-tertiary: #0e1f38;
+            --bg-hover: #1b3152;
+            --border-primary: #1e3a5f;
+            --border-accent: #2d4f7c;
+            --border-glow: #3f7bcb;
+            --text-primary: #ffffff;
+            --text-secondary: #e0e8f0;
+            --text-muted: #9bb7e0;
+            --text-dim: #5a7bb0;
+            --accent-primary: #4b7ec9;
+            --accent-glow: #2d68b0;
+            --shadow-color: rgba(30, 80, 150, 0.25);
+            --transition: all 0.2s ease;
+            --shadow-card: 0 25px 40px -12px #000;
         }
 
         body {
-            background-color: #030614;
+            background-color: var(--bg-primary);
             font-family: 'Inter', sans-serif;
-            color: #e0e8f0;
+            color: var(--text-secondary);
             line-height: 1.5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
         }
 
         .card {
-            max-width: 750px;
+            max-width: 480px;
             width: 100%;
-            background-color: #0a1428;
-            border-radius: 40px;
-            padding: 3rem 2.5rem;
-            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.9), 
-                        0 0 0 1px #1e3a5f inset,
-                        0 0 25px rgba(30, 80, 150, 0.3);
-            border: none;
-            transition: box-shadow 0.2s ease;
-        }
-
-        .card:hover {
-            box-shadow: 0 30px 55px -10px #030814, 
-                        0 0 0 1px #2b5580 inset,
-                        0 0 35px rgba(50, 120, 210, 0.5);
+            background-color: var(--bg-secondary);
+            border-radius: 32px;
+            padding: 32px 24px;
+            box-shadow: var(--shadow-card), 0 0 0 1px var(--border-primary) inset, 0 0 25px var(--shadow-color);
+            transition: var(--transition);
         }
 
         hr {
             border: none;
             height: 1px;
-            background: linear-gradient(90deg, transparent, #2a4875, transparent);
-            margin: 2.2rem 0;
-        }
-
-        h1, h2, h3 {
-            font-weight: 400;
-            letter-spacing: -0.02em;
+            background: linear-gradient(90deg, transparent, var(--border-primary), transparent);
+            margin: 32px 0;
+            opacity: 0.7;
         }
 
         h1 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 0.25rem;
-            text-shadow: 0 0 10px rgba(70, 140, 255, 0.4);
+            font-size: clamp(2.2rem, 8vw, 2.8rem);
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(70, 140, 255, 0.3);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
         h2 {
-            font-size: 1.9rem;
+            font-size: clamp(1.3rem, 5vw, 1.6rem);
+            font-weight: 400;
             color: #c0d4f5;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid #253b5c;
-            padding-bottom: 0.6rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-primary);
+            padding-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: 12px;
         }
 
         h2 i {
-            color: #4b7ec9;
-            font-size: 1.8rem;
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            width: 30px;
         }
 
         h3 {
-            font-size: 1.3rem;
+            font-size: clamp(1.2rem, 4vw, 1.3rem);
+            font-weight: 400;
             color: #d0e0ff;
-            margin: 1.5rem 0 0.8rem 0;
+            margin: 28px 0 16px;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 12px;
         }
 
         h3 i {
             color: #5f8fd9;
+            width: 26px;
         }
 
-        .quote-section {
-            background: linear-gradient(145deg, #0e1f38, #0a172d);
-            border: 1px solid #2d4f7c;
+        /* Language switcher */
+        .lang-row {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid #2c4875;
+            color: var(--text-muted);
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            min-width: 64px;
+            text-align: center;
+        }
+
+        .lang-btn.active {
+            background: var(--border-primary);
+            color: var(--text-primary);
+            border-color: var(--border-glow);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .lang-btn:hover,
+        .lang-btn:focus-visible {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            outline: 2px solid var(--border-glow);
+            outline-offset: 2px;
+        }
+
+        /* Meta row */
+        .meta-row {
+            display: flex;
+            gap: 28px;
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 8px 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .meta-row i {
+            margin-right: 6px;
+            color: var(--accent-primary);
+        }
+
+        /* Social links */
+        .social-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #111f36;
+            color: #c8dcff;
+            padding: 10px 18px;
+            border-radius: 50px;
+            border: 1px solid #294775;
+            font-size: 0.95rem;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            flex: 0 1 auto;
+            font-weight: 500;
+        }
+
+        .social-btn:hover,
+        .social-btn:focus-visible {
+            background: var(--bg-hover);
+            border-color: #4075b0;
+            box-shadow: 0 0 18px var(--accent-glow);
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .social-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Language chips */
+        .lang-chips {
+            display: flex;
+            gap: 16px;
+            margin: 16px 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            background: #0c1a30;
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 1px solid #2c4875;
+            font-size: 0.95rem;
+            box-shadow: 0 0 12px rgba(40, 100, 200, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chip i {
+            color: var(--accent-primary);
+        }
+
+        /* Quote block */
+        .quote-block {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-accent);
             border-radius: 24px;
-            padding: 1.8rem 2rem;
-            margin: 2rem 0 2.2rem;
-            box-shadow: 0 0 25px rgba(45, 90, 160, 0.3);
-            position: relative;
+            padding: 24px 22px;
+            margin: 24px 0 32px;
+            box-shadow: 0 0 25px rgba(45, 90, 160, 0.2);
+            transition: var(--transition);
         }
 
-        .quote-section i {
-            color: #3f7bcb;
-            font-size: 2rem;
-            opacity: 0.6;
-            margin-bottom: 0.5rem;
+        .quote-block:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 30px rgba(63, 123, 203, 0.3);
         }
 
         .quote-text {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-style: italic;
             color: #d0e4ff;
             line-height: 1.6;
-            text-shadow: 0 0 8px rgba(60, 120, 220, 0.3);
+            margin-top: 8px;
         }
 
         .quote-author {
-            margin-top: 1rem;
+            margin-top: 16px;
             color: #7f9fd0;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
         }
 
-        .name-section {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 1.8rem;
-        }
-
-        .meta-info {
-            display: flex;
-            gap: 2rem;
-            color: #9bb7e0;
-            font-size: 1.15rem;
-            margin-top: 0.2rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-            margin: 1.5rem 0 1.8rem;
-            flex-wrap: wrap;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #111f36;
-            color: #c8dcff;
-            padding: 0.65rem 1.5rem;
-            border-radius: 40px;
-            border: 1px solid #294775;
-            font-size: 1.1rem;
-            transition: 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 10, 30, 0.5);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .social-links a:hover {
-            background: #1b3152;
-            border-color: #4075b0;
-            box-shadow: 0 0 15px #2d68b0;
-            color: white;
-        }
-
-        .languages {
-            display: flex;
-            gap: 1.5rem;
-            margin: 1.5rem 0 1rem;
-        }
-
-        .lang-chip {
-            background: #0c1a30;
-            padding: 0.4rem 1.4rem;
-            border-radius: 40px;
-            border: 1px solid #2c4875;
-            font-size: 1rem;
-            box-shadow: 0 0 8px rgba(40, 100, 200, 0.2);
-        }
-
-        .section {
-            margin-bottom: 2.5rem;
-        }
-
+        /* Fandom grid */
         .fandom-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.7rem 1rem;
+            gap: 10px;
             list-style: none;
-            margin: 0.5rem 0 0.2rem;
+            margin-bottom: 8px;
         }
 
         .fandom-grid li {
             background: #102239;
-            padding: 0.4rem 1.2rem;
-            border-radius: 30px;
-            font-size: 1rem;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.95rem;
             border: 1px solid #2c4870;
-            box-shadow: 0 0 8px rgba(30, 80, 170, 0.25);
+            box-shadow: 0 0 10px rgba(30, 80, 170, 0.2);
+            transition: var(--transition);
         }
 
-        .skill-grid {
+        .fandom-grid li:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(63, 123, 203, 0.3);
+        }
+
+        /* Skill cards */
+        .skill-stack {
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
-            margin: 0.5rem 0 0.2rem;
+            gap: 12px;
         }
 
-        .skill-card {
+        .skill-item {
             background: #0e1b30;
-            border-left: 4px solid #3f7bcb;
-            padding: 1rem 1.4rem;
+            border-left: 4px solid var(--border-glow);
+            padding: 14px 18px;
             border-radius: 0 18px 18px 0;
-            font-size: 1.05rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 0 1px #1f3d64;
+            font-size: 1rem;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), 0 0 0 1px #1f3d64;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 14px;
+            transition: var(--transition);
         }
 
-        .skill-card i {
-            width: 2rem;
+        .skill-item:hover {
+            border-left-width: 6px;
+            background: #112643;
+            box-shadow: 0 4px 18px rgba(63, 123, 203, 0.3);
+        }
+
+        .skill-item i {
+            width: 26px;
             color: #6d9cf0;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             text-align: center;
         }
 
-        .music-grid {
+        /* Music special */
+        .music-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin: 0.5rem 0 0.2rem;
+            gap: 10px;
+            margin-bottom: 8px;
         }
 
-        .music-item {
+        .music-pill {
             background: linear-gradient(135deg, #142b48, #0e1f38);
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            padding: 10px 24px;
+            border-radius: 60px;
+            font-size: 1rem;
             border: 1px solid #3f6eb0;
-            box-shadow: 0 0 20px rgba(75, 130, 220, 0.4);
+            box-shadow: 0 0 20px rgba(75, 130, 220, 0.3);
             display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
-            backdrop-filter: blur(2px);
+            gap: 10px;
+            transition: var(--transition);
         }
 
-        .music-item i {
-            color: #7faef0;
-            font-size: 1.3rem;
+        .music-pill:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 25px rgba(63, 123, 203, 0.5);
         }
 
-        .projects-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin: 1rem 0 0.5rem;
+        /* Projects */
+        .project-wrapper {
+            margin-bottom: 16px;
         }
 
-        .project-card {
+        .project-btn {
             background: #0e1b30;
-            border: 1px solid #2d4f7c;
+            border: 1px solid var(--border-accent);
             border-radius: 20px;
-            padding: 1.2rem 1.5rem;
+            padding: 16px 18px;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            transition: 0.2s;
+            gap: 14px;
+            width: 100%;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
             text-decoration: none;
             color: inherit;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            will-change: border-color, box-shadow;
         }
 
-        .project-card:hover {
-            border-color: #4f8ad4;
-            box-shadow: 0 0 20px #2d68b0;
+        .project-btn:hover,
+        .project-btn:focus-visible {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 22px var(--accent-glow);
             background: #112643;
+            outline: none;
         }
 
-        .project-card i {
-            font-size: 1.8rem;
+        .project-btn i:first-child {
+            font-size: 1.5rem;
             color: #6d9cf0;
-            width: 2.5rem;
+            width: 34px;
             text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .project-btn .fa-chevron-down {
+            color: #6d9cf0;
+            font-size: 1rem;
+            transition: transform 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+            width: auto;
         }
 
         .project-info {
             flex: 1;
+            text-align: left;
         }
 
         .project-title {
-            font-size: 1.2rem;
-            color: white;
-            margin-bottom: 0.2rem;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            font-weight: 500;
         }
 
         .project-desc {
-            font-size: 0.95rem;
-            color: #9bb7e0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
+        .expandable {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.05s, padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #0a1a2f;
+            border: 1px solid #3f6eb0;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            margin-top: -1px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            padding: 0 20px;
+        }
+
+        .expandable.show {
+            max-height: 350px;
+            opacity: 1;
+            padding: 20px;
+        }
+
+        .exp-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .exp-link {
+            background: #11243e;
+            border: 1px solid var(--border-glow);
+            color: var(--text-primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .exp-link:hover,
+        .exp-link:focus-visible {
+            background: #1b3a62;
+            box-shadow: 0 0 18px var(--accent-glow);
+            outline: none;
+        }
+
+        .exp-description {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: #b0c8e8;
+            line-height: 1.5;
+        }
+
+        /* Olympiad table - without trophy icons */
         .olympiad-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 0.8rem 0 0.5rem;
+            margin-top: 8px;
         }
 
         .olympiad-table td {
-            padding: 0.8rem 0.2rem;
+            padding: 14px 0;
             border-bottom: 1px dashed #263f62;
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
 
         .olympiad-table td:last-child {
             text-align: right;
         }
 
+        .olympiad-table i {
+            color: var(--accent-primary);
+            margin-right: 8px;
+            width: 20px;
+        }
+
         .prize-badge {
             background: #173458;
             color: #b8d6ff;
-            padding: 0.25rem 1rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 400;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
             border: 1px solid #3d6eb0;
-            box-shadow: 0 0 8px #2d5faa;
+            box-shadow: 0 0 10px #2d5faa;
             white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .footer-glow {
+        /* Footer */
+        .footer {
             text-align: center;
-            margin-top: 2.8rem;
+            margin-top: 32px;
             font-size: 0.9rem;
-            color: #5a7bb0;
-            text-shadow: 0 0 6px #2460b0;
+            color: var(--text-dim);
+            text-shadow: 0 0 8px #2460b0;
             letter-spacing: 0.5px;
+            padding: 8px 0;
         }
 
-        @media (max-width: 550px) {
+        /* Language switching */
+        [data-lang="ru"] .en {
+            display: none;
+        }
+
+        [data-lang="en"] .ru {
+            display: none;
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        button,
+        a,
+        .project-btn {
+            touch-action: manipulation;
+            cursor: pointer;
+        }
+
+        @media (max-width: 400px) {
             .card {
-                padding: 2rem 1.3rem;
+                padding: 24px 16px;
             }
-            h1 {
-                font-size: 2.5rem;
+
+            .social-btn {
+                padding: 8px 14px;
+                font-size: 0.9rem;
             }
-            .meta-info {
-                flex-direction: column;
-                gap: 0.4rem;
+
+            .fandom-grid li {
+                padding: 6px 14px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
-<body>
+<body data-lang="en">
     <div class="card">
-        <div class="name-section">
-            <h1>Strateg</h1>
-            <div class="meta-info">
-                <span><i class="fas fa-user"></i> Age: 1_</span>
-                <span><i class="fas fa-map-pin"></i> Russia</span>
-            </div>
+        <!-- Language switcher -->
+        <div class="lang-row">
+            <button class="lang-btn active" onclick="switchLanguage('en')" aria-label="Switch to English">EN</button>
+            <button class="lang-btn" onclick="switchLanguage('ru')" aria-label="Переключить на русский">RU</button>
         </div>
 
-        <div class="social-links">
-            <a href="https://t.me/su57ks" target="_blank"><i class="fab fa-telegram"></i> @su57ks · General</a>
-            <a href="https://t.me/gin_ks" target="_blank"><i class="fab fa-telegram"></i> @gin_ks · Work & PC</a>
-            <a href="https://github.com/su57ks" target="_blank"><i class="fab fa-github"></i> su57ks</a>
+        <!-- Name & meta -->
+        <h1>Strateg</h1>
+        <div class="meta-row">
+            <span><i class="fas fa-user" aria-hidden="true"></i> <span class="en">Age: 1_</span><span class="ru">Возраст: 1_</span></span>
+            <span><i class="fas fa-map-pin" aria-hidden="true"></i> <span class="en">Russia</span><span class="ru">Россия</span></span>
         </div>
 
-        <div class="languages">
-            <span class="lang-chip"><i class="fas fa-language"></i> Russian · native</span>
-            <span class="lang-chip"><i class="fas fa-language"></i> English · fluent</span>
+        <!-- Social links -->
+        <div class="social-row">
+            <a href="https://t.me/su57ks" class="social-btn" target="_blank" rel="noopener"><i class="fab fa-telegram" aria-hidden="true"></i> @su57ks</a>
+            <a href="https://t.me/gin_ks" class="social-btn" target="_blank" rel="noopener"><i class="fab fa-telegram" aria-hidden="true"></i> @gin_ks</a>
+            <a href="https://github.com/su57ks" class="social-btn" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> su57ks</a>
         </div>
 
-        <!-- Aizen Sosuke quote -->
-        <div class="quote-section">
-            <i class="fas fa-quote-left"></i>
-            <div class="quote-text">"It's easy to prevent an expected betrayal. The problem is that betrayal is unexpected by its very nature."</div>
+        <!-- Languages -->
+        <div class="lang-chips">
+            <span class="chip"><i class="fas fa-language" aria-hidden="true"></i> <span class="en">Russian · native</span><span class="ru">Русский · родной</span></span>
+            <span class="chip"><i class="fas fa-language" aria-hidden="true"></i> <span class="en">English · fluent</span><span class="ru">Английский · свободно</span></span>
+        </div>
+
+        <!-- Aizen quote -->
+        <div class="quote-block">
+            <i class="fas fa-quote-left" style="color:#3f7bcb; font-size:1.8rem; opacity:0.6;" aria-hidden="true"></i>
+            <div class="quote-text en">"It's easy to prevent an expected betrayal. The problem is that betrayal is unexpected by its very nature."</div>
+            <div class="quote-text ru">"Легко предотвратить ожидаемое предательство. Проблема в том, что предательство неожиданно по своей сути."</div>
             <div class="quote-author">
-                <i class="fas fa-skull"></i> Sosuke Aizen · Bleach
+                <i class="fas fa-skull" aria-hidden="true"></i> <span class="en">Sosuke Aizen · Bleach</span><span class="ru">Сосуке Айзен · Блич</span>
             </div>
         </div>
 
         <hr>
 
-        <div class="section">
-            <h2><i class="fas fa-tv"></i> Anime & Manga</h2>
-            <ul class="fandom-grid">
-                <li>Naruto</li>
-                <li>Bleach</li>
-                <li>Sword Art Online (1 & 2)</li>
-                <li>Volleyball</li>
-                <li>Kuroko no Basket</li>
-                <li>Solo Leveling</li>
-                <li>Classroom of the Elite</li>
-                <li>JoJo (1-4 seasons)</li>
-                <li>Eminence in Shadow</li>
-                <li>Jujutsu Kaisen</li>
-                <li>Death Note</li>
-                <li>Attack on Titan</li>
-                <li>Mushoku Tensei</li>
-                <li>Code Geass</li>
-            </ul>
+        <!-- Anime section -->
+        <h2><i class="fas fa-tv" aria-hidden="true"></i> <span class="en">Anime & Manga</span><span class="ru">Аниме и манга</span></h2>
+        <ul class="fandom-grid">
+            <li><span class="en">Naruto</span><span class="ru">Наруто</span></li>
+            <li><span class="en">Bleach</span><span class="ru">Блич</span></li>
+            <li><span class="en">Sword Art Online (1&2)</span><span class="ru">Мастер меча онлайн</span></li>
+            <li><span class="en">Volleyball</span><span class="ru">Волейбол</span></li>
+            <li><span class="en">Kuroko no Basket</span><span class="ru">Куроко</span></li>
+            <li><span class="en">Solo Leveling</span><span class="ru">Поднятие уровня</span></li>
+            <li><span class="en">Classroom of Elite</span><span class="ru">Элитный класс</span></li>
+            <li><span class="en">JoJo (1-4)</span><span class="ru">ДжоДжо</span></li>
+            <li><span class="en">Eminence in Shadow</span><span class="ru">Восхождение в тени</span></li>
+            <li><span class="en">Jujutsu Kaisen</span><span class="ru">Магическая битва</span></li>
+            <li><span class="en">Death Note</span><span class="ru">Тетрадь смерти</span></li>
+            <li><span class="en">Attack on Titan</span><span class="ru">Атака титанов</span></li>
+            <li><span class="en">Mushoku Tensei</span><span class="ru">Реинкарнация</span></li>
+            <li><span class="en">Code Geass</span><span class="ru">Код Гиасс</span></li>
+        </ul>
+
+        <!-- Programming -->
+        <h2><i class="fas fa-code" aria-hidden="true"></i> <span class="en">Programming</span><span class="ru">Программирование</span></h2>
+        
+        <div class="skill-stack">
+            <div class="skill-item"><i class="fas fa-robot" aria-hidden="true"></i> <span class="en">Telegram bots (aiogram 3)</span><span class="ru">Telegram боты (aiogram 3)</span></div>
+            <div class="skill-item"><i class="fas fa-terminal" aria-hidden="true"></i> <span class="en">Basic Python</span><span class="ru">Базовый Python</span></div>
+            <div class="skill-item"><i class="fas fa-puzzle-piece" aria-hidden="true"></i> <span class="en">exteraGram plugins</span><span class="ru">Плагины exteraGram</span></div>
+            <div class="skill-item"><i class="fas fa-brain" aria-hidden="true"></i> <span class="en">Machine Learning</span><span class="ru">Машинное обучение</span></div>
+            <div class="skill-item"><i class="fas fa-film" aria-hidden="true"></i> <span class="en">2D Motion</span><span class="ru">2D моушен</span></div>
         </div>
 
-        <div class="section">
-            <h2><i class="fas fa-code"></i> Programming & Tech</h2>
-            
-            <h3><i class="fab fa-python"></i> Python</h3>
-            <div class="skill-grid">
-                <div class="skill-card">
-                    <i class="fas fa-robot"></i> Telegram bots (aiogram 3)
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-terminal"></i> Basic Python
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-puzzle-piece"></i> Plugins for exteraGram
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-brain"></i> Machine Learning
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-film"></i> 2D Motion
-                </div>
-            </div>
-
-            <!-- Music section with different design -->
-            <h3><i class="fas fa-music"></i> Music</h3>
-            <div class="music-grid">
-                <div class="music-item">
-                    <i class="fas fa-headphones"></i> Phonk
-                </div>
-            </div>
+        <h3><i class="fas fa-music" aria-hidden="true"></i> <span class="en">Music</span><span class="ru">Музыка</span></h3>
+        <div class="music-row">
+            <div class="music-pill"><i class="fas fa-headphones" aria-hidden="true"></i> <span class="en">Phonk</span><span class="ru">Фонк</span></div>
         </div>
 
-        <!-- Projects section -->
-        <div class="section">
-            <h2><i class="fas fa-rocket"></i> Projects</h2>
-            <div class="projects-grid">
-                <a href="https://github.com/su57ks/8march.github.io" target="_blank" class="project-card">
-                    <i class="fab fa-github"></i>
-                    <div class="project-info">
-                        <div class="project-title">March 8 greeting</div>
-                        <div class="project-desc">8march.github.io · Web project</div>
-                    </div>
-                </a>
-                <a href="https://t.me/s1gmaedits" target="_blank" class="project-card">
-                    <i class="fab fa-telegram"></i>
-                    <div class="project-info">
-                        <div class="project-title">Sigma edits</div>
-                        <div class="project-desc">@s1gmaedits · Telegram channel</div>
-                    </div>
-                </a>
-                <a href="https://t.me/ksplugins" target="_blank" class="project-card">
-                    <i class="fab fa-telegram"></i>
-                    <div class="project-info">
-                        <div class="project-title">Plugins for exteraGram</div>
-                        <div class="project-desc">@ksplugins · Telegram channel</div>
-                    </div>
-                </a>
+        <!-- Projects -->
+        <h2><i class="fas fa-rocket" aria-hidden="true"></i> <span class="en">Projects</span><span class="ru">Проекты</span></h2>
+        
+        <!-- 8 march expandable -->
+        <div class="project-wrapper">
+            <div class="project-btn" onclick="toggleProject()" role="button" tabindex="0" aria-expanded="false" aria-controls="expandable">
+                <i class="fab fa-github" aria-hidden="true"></i>
+                <div class="project-info">
+                    <div class="project-title">8march.github.io</div>
+                    <div class="project-desc en">March 8 greeting</div>
+                    <div class="project-desc ru">Поздравление с 8 марта</div>
+                </div>
+                <i class="fas fa-chevron-down" id="chevron" aria-hidden="true"></i>
+            </div>
+            <div class="expandable" id="expandable">
+                <div class="exp-links">
+                    <a href="https://github.com/su57ks/8march" class="exp-link" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                    <a href="https://su57ks.github.io/8march/" class="exp-link" target="_blank" rel="noopener"><i class="fas fa-globe" aria-hidden="true"></i> <span class="en">Live</span><span class="ru">Сайт</span></a>
+                </div>
+                <div class="exp-description en">
+                    Interactive greeting page with animations, flowers and personalized messages.
+                </div>
+                <div class="exp-description ru">
+                    Интерактивная страница-поздравление с анимацией, цветами и персональными сообщениями.
+                </div>
             </div>
         </div>
 
-        <div class="section">
-            <h2><i class="fas fa-medal"></i> Olympiads</h2>
-            
-            <table class="olympiad-table">
-                <tr>
-                    <td><i class="fas fa-atom"></i> Physics</td>
-                    <td><span class="prize-badge"><i class="fas fa-trophy"></i> Prize winner</span></td>
-                </tr>
-                <tr>
-                    <td><i class="fas fa-globe"></i> Geography</td>
-                    <td><span class="prize-badge"><i class="fas fa-trophy"></i> Prize winner</span></td>
-                </tr>
-            </table>
-        </div>
+        <!-- Other projects -->
+        <a href="https://t.me/s1gmaedits" class="project-btn" target="_blank" rel="noopener" style="margin-bottom:16px;">
+            <i class="fab fa-telegram" aria-hidden="true"></i>
+            <div class="project-info">
+                <div class="project-title">s1gmaedits</div>
+                <div class="project-desc en">Sigma edits · Telegram</div>
+                <div class="project-desc ru">Сигма эдиты · Telegram</div>
+            </div>
+        </a>
+
+        <a href="https://t.me/ksplugins" class="project-btn" target="_blank" rel="noopener">
+            <i class="fab fa-telegram" aria-hidden="true"></i>
+            <div class="project-info">
+                <div class="project-title">ksplugins</div>
+                <div class="project-desc en">exteraGram plugins</div>
+                <div class="project-desc ru">Плагины exteraGram</div>
+            </div>
+        </a>
+
+        <!-- Olympiads - without trophy icons -->
+        <h2 style="margin-top:32px;"><i class="fas fa-medal" aria-hidden="true"></i> <span class="en">Olympiads</span><span class="ru">Олимпиады</span></h2>
+        <table class="olympiad-table">
+            <tr><td><i class="fas fa-atom"></i> <span class="en">Physics</span><span class="ru">Физика</span></td><td><span class="prize-badge"><span class="en">Prize winner</span><span class="ru">Призёр</span></span></td></tr>
+            <tr><td><i class="fas fa-globe"></i> <span class="en">Geography</span><span class="ru">География</span></td><td><span class="prize-badge"><span class="en">Prize winner</span><span class="ru">Призёр</span></span></td></tr>
+        </table>
 
         <hr>
 
-        <div class="footer-glow">
-            ✦ always learning ✦
+        <div class="footer">
+            ✦ <span class="en">always learning</span><span class="ru">всегда учусь</span> ✦
         </div>
     </div>
+
+    <script>
+        function switchLanguage(lang) {
+            document.body.dataset.lang = lang;
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase() === lang.toLowerCase()) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function toggleProject() {
+            const expand = document.getElementById('expandable');
+            const chevron = document.getElementById('chevron');
+            const button = expand.previousElementSibling;
+            
+            expand.classList.toggle('show');
+            chevron.style.transform = expand.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)';
+            button.setAttribute('aria-expanded', expand.classList.contains('show'));
+        }
+    </script>
 </body>
 </html>
